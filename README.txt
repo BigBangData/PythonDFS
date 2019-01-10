@@ -49,7 +49,7 @@ There are 4 servers: DFS1 ---> DFS4 and one client: DFC.
 
 		[File Chunk Pair Locations]
 		---------------------------------------------------------------------
-		hash mod  	DFS1 		DFS2 		DFS3		 DFS4	   
+		hash mod  	DFS1 		DFS2 		DFS3		DFS4	   
 		---------------------------------------------------------------------
 		 0 		(1,2) 		(2,3) 		(3,4) 		(4,1) 	   
 		 1 		(4,1) 		(1,2) 		(2,3) 		(3,4) 	   
