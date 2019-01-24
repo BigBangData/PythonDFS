@@ -5,7 +5,7 @@ README
 Project Description
 ===================
 
-Toy example Python implementation of a file distribution system with a server-client architecture.
+Toy example Python implementation (for Windows machines as of 1.23.2019, Linux implementation pending) of a file distribution system with a server-client architecture.
 
 The DFS folders refer to the Distribution File Servers. 
 
