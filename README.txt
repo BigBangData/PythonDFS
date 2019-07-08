@@ -1,15 +1,15 @@
+===================
 README
-======
+===================
 
 Project Description
 ===================
 
-Toy example Python implementation of a file distribution system with a server-client architecture.
+Toy example Python implementation* of a file distribution system with a server-client architecture.
 
-The DFS folders refer to the Distribution File Servers. 
+*(for Windows machines as of 1.23.2019, Linux implementation pending)
 
-There are 4 servers: DFS1 ---> DFS4 and one client: DFC.
-
+The DFS folders refer to the Distribution File Servers. There are 4 servers (DFS1, ... DFS4) and one client (DFC).
 
 - RUN (any number of) servers first, then the client:
 
@@ -31,8 +31,8 @@ There are 4 servers: DFS1 ---> DFS4 and one client: DFC.
 	spacing and syntax found in the conf files and be identical across all conf files (dfs and dfc 
 	conf files are identical except for the name).
 	
-		[A future addition to this project would include a "set username/password" component which 
-		would populate the conf files. Note that usernames must be unique.]
+	[A future addition to this project would include a "set username/password" component which 
+	would populate the conf files. Note that usernames must be unique.]
 	
 	Password hashing: the hashing algorithm is md5. If another is desired, all the appropriate 
 	hashes must be recomputed in the dfc.py file (CTRL+F 'hashlib').
@@ -42,31 +42,31 @@ There are 4 servers: DFS1 ---> DFS4 and one client: DFC.
 
 	[PUT] puts any text files located within the DFC folder into the servers.
 	
-			PUT splits files into 4 chunks, stores pairs of chunks into each server after hashing 
-			file and taking the modulus of the hash to ensure fair distribution, according to 
-			the table below. The duplication of files ensures reliability if 1 server is down.
+		PUT splits files into 4 chunks, stores pairs of chunks into each server after hashing 
+		file and taking the modulus of the hash to ensure fair distribution, according to 
+		the table below. The duplication of files ensures reliability if 1 server is down.
 
 		[File Chunk Pair Locations]
-		-----------------------------------------------------------
-		hash mod  	DFS1 		DFS2 		DFS3		 DFS4	   
-		-----------------------------------------------------------
-		 0 			(1,2) 		(2,3) 		(3,4) 		(4,1) 	   
-		 1 			(4,1) 		(1,2) 		(2,3) 		(3,4) 	   
-		 2 			(3,4) 		(4,1) 		(1,2) 		(2,3) 	   
-		 3 			(2,3) 		(3,4) 		(4,1) 		(1,2) 	   
-		-----------------------------------------------------------	 
+		---------------------------------------------------------------------
+		hash mod  	DFS1 		DFS2 		DFS3		DFS4	   
+		---------------------------------------------------------------------
+		 0 		(1,2) 		(2,3) 		(3,4) 		(4,1) 	   
+		 1 		(4,1) 		(1,2) 		(2,3) 		(3,4) 	   
+		 2 		(3,4) 		(4,1) 		(1,2) 		(2,3) 	   
+		 3 		(2,3) 		(3,4) 		(4,1) 		(1,2) 	   
+		---------------------------------------------------------------------	 
 
 		* NB: PUT lists the files within the DFC folder which are available for transfer.
 
 	[GET] gets files from the servers into a user folder within the DFC folder. 
 	
-			GET joins the 4 chunks into a single file. If a single server is down, this operation can 
-			still succeed. If the operation fails, the file is not created and the user gets a 
-			'Transfer failed' message.
+		GET joins the 4 chunks into a single file. If a single server is down, this operation can 
+		still succeed. If the operation fails, the file is not created and the user gets a 
+		'Transfer failed' message.
 
 	[LIST] provides a list of file chunks a user has stored in the server. From the list, a user
 	        can glean file names and specify a file to GET. If a user chooses PUT within LIST, 
-			the user can determine a file to put as per the * NB above.
+		the user can determine a file to put as per the * NB above.
 
 			
 - NOTES:
@@ -76,8 +76,9 @@ There are 4 servers: DFS1 ---> DFS4 and one client: DFC.
 	* There is a lot that can be improved, feel free to suggest improvements.
 
 
-==================================================================================================
+====================================================================================================================
 TESTING
+=======
 
 Test DFC-DFS:
 	
@@ -92,8 +93,8 @@ Test DFC-DFS:
 		3. AFTER user dir and file dir exist but BEFORE files exist.
 		4. AFTER files exist but not all files.
 		5. AFTER all dirs and files exist. -->  Reliability of file transfer should be guaranteed 
-											   with 1 server down, and in some cases for 2 servers 
-											   down (consult table of chunk locations).
+							 with 1 server down, and in some cases for 2 servers 
+							 down (consult table of chunk locations).
 
 	- For any combination/order of commands:
 		 - 	The natural order is PUT, LIST, GET.
@@ -101,8 +102,9 @@ Test DFC-DFS:
 		 -	Test GET/PUT within LIST.
 
 
---------------------------------------------------------------------------------------------------
-PROBLEMS FIXED:
+====================================================================================================================
+PROBLEMS FIXED
+==============
 
 Concatention of usernamepassword and buffersizechunkname ---> used timeouts (time.sleep(0.5)).
 
@@ -123,8 +125,9 @@ Client-side authorization grants access to any correct username with any correct
 
 When all servers are down, exit client instead of running through the entire program.
 
---------------------------------------------------------------------------------------------------
-TO DO:
+====================================================================================================================
+TO DO
+=====
 
 Chunks stored and retrieved with every other line empty.
 
@@ -134,6 +137,7 @@ SALT passwords.
 
 ENCRYPT all traffic.
 
-==================================================================================================
+Implement project for Linux machines.
 
+====================================================================================================================
 
