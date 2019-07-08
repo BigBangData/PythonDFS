@@ -20,20 +20,20 @@ Some security is implemented via authentication, and storage of password hashes.
 **RUN** (any number of) servers first, then the client:
 
 ```
-	py dfs1.py 10001
-	py dfs2.py 10002
-	py dfs3.py 10003
-	py dfs4.py 10004
+$ py dfs1.py 10001
+$ py dfs2.py 10002
+$ py dfs3.py 10003
+$ py dfs4.py 10004
 
-	py dfc.py dfc.conf
+$ py dfc.py dfc.conf
 ```
 	
 **USERS and PASSWORDS**:
 
 ```	
-	Alice: Crimson33
-	Bob: Velvet77
-	Eve: Magellan101
+Alice: Crimson33
+Bob: Velvet77
+Eve: Magellan101
 ```
 		
 Usernames and passwords can be changed in the configuration files. Changes must adhere to the 
@@ -58,17 +58,17 @@ the table below. The duplication of files ensures reliability if 1 server is dow
 `PUT` also lists files within the DFC folder which are available for transfer.
 
 
-```
-		[File Chunk Pair Locations]
-		---------------------------------------------------------------
-		hash mod  	 DFS1 		 DFS2 		 DFS3		  DFS4	   
-		---------------------------------------------------------------
-		 0 			(1,2) 		(2,3) 		(3,4) 		(4,1) 	   
-		 1 			(4,1) 		(1,2) 		(2,3) 		(3,4) 	   
-		 2 			(3,4) 		(4,1) 		(1,2) 		(2,3) 	   
-		 3 			(2,3) 		(3,4) 		(4,1) 		(1,2) 	   
-		---------------------------------------------------------------	 
-```
+### File Chunk Pair Locations
+
+
+|hash mod|DFS1|DFS2|DFS3|DFS4|
+|:--:|:-----:|:-----:|:-----:|:-----:|
+| 0  | (1,2) | (2,3) | (3,4) | (4,1) | 
+| 1  | (4,1) | (1,2) | (2,3) | (3,4) |
+| 2  | (3,4) | (4,1) | (1,2) | (2,3) |
+| 3  | (2,3) | (3,4) | (4,1) | (1,2) |
+
+
 
 - **`[GET]` method**:
 
@@ -77,6 +77,8 @@ the table below. The duplication of files ensures reliability if 1 server is dow
 	
 `GET` joins the 4 chunks into a single file. If a single server is down, this operation can 
 still succeed. If the operation fails, the file is not created and the user gets a 'Transfer failed' message.
+
+
 
 - **`[LIST]` method**:
 
