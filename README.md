@@ -1,16 +1,20 @@
 
-# Python Distributed File System
+# A Low-Level Python Distributed File System (DFS)
 
 ## Project Description
 
-The Python DFS is a Minimum Viable Product implementation of a Distributed File System, defined as a cluster of servers 
-hosting potentially large files that needs to be stored in a fault-tolerant and reliable manner. 
+This project was conceived as a proof-of-concept for a low-level implementation of a Python DFS using only 
+stdlib modules (i.e. 'socket' for networking) to transfer and store files in a distributed and resilient manner.
 
-Written in Python with a server-client architecture, I demonstrate this MVP file system locally using folders in my computer.
-A given file is distributed (using the PUT method) from the DFC (the Client) to four DFS (the Servers) in various chunks,
-which can be retrieved (using the GET method) and used to reconstruct the file. 
+This project is an MVP, and as such it does not incorporate all the [design goals of a DFS](https://en.wikipedia.org/wiki/Clustered_file_system#Distributed_file_systems).
+This Python DFS is defined here simply as a cluster of servers in a server-client architecture, hosting potentially large text files 
+that need to be transferred and stored reliably and securely in a fault-tolerant way. 
 
-The built-in redundancy in the way the file chunks are stored in the four servers ensures that if a given server fails,
+Below I demonstrate how to run the Python DFS locally, simulating a distributed cluster. 
+A given file is distributed (`PUT <file_name>`) from the DFC (the Client) to four DFS (the Servers) in chunks,
+which can be retrieved (`GET <file_name>`) and used to reconstruct the file. 
+
+There's a built-in redundancy in the way the file chunks are stored in the servers, ensuring that if a given server fails,
 the file can still be reconstructed. Traffic optimization is achieved by not sending any redundant file chunks unless necessary.
 Some security is implemented via authentication, and storage of password hashes. 
 
@@ -88,14 +92,10 @@ If a user chooses `PUT` within `LIST`, the user can determine a file to send for
 
 
 			
-## Notes
-			
-* When prompted for a file name, specify file name without the .txt extension.
-* This project is not intended to be an actual example to be followed, just a toy example.
-* There is a lot that can be improved, feel free to suggest improvements.
+- __Note__: When prompted for a file name, specify file name without the .txt extension.
 
 
-## Testing
+## Test Cases
 
 1. For any user: first cases vs last case differ, as they enter different loops within code
 	
@@ -115,19 +115,12 @@ If a user chooses `PUT` within `LIST`, the user can determine a file to send for
 	- Test any order
 	- Test `GET` or `PUT` within `LIST`
 
-
 ## Demo 
 
-In this .gif I demonstrate some ways to test the file system for reliability when one server is down. 
-On the left are the three servers up (DFS1, DFS2, DFS3) and on the right the client (DFC). In a realistic 
-implementation the servers would just be up and running in the background.
-
+Here I show some ways to test the file system for reliability when one server is down. 
+On the left are the three servers up (DFS1, DFS2, DFS3) and on the right the client (DFC).
 
 ![image: PythonDFSdemo](./images/PythonDFSdemo.gif) 
-
-
-
-
 
 
 ## Problems Fixed
@@ -142,12 +135,14 @@ implementation the servers would just be up and running in the background.
 - Client-side authorization grants access to any correct username with any correct password (fixed)
 - When all servers are down, exit client instead of running through the entire program
 
-## To Do 
+## Ideas for Future Iterations
 
 - Populate .conf files dynamically via a `SET` method for usernames and passwords 
 - Chunks stored and retrieved with every other line empty
 - Less exiting out: `GOTO` equivalent?
 - SALT passwords
 - ENCRYPT all traffic
+- Send other file types (images, etc.)
+- Redo in a streaming architecture
 
 --- 
